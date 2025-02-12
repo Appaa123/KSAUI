@@ -10,7 +10,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewEncapsulation } from '@angular/c
 export class DashboardComponent {
   displayedColumns: string[] = ['name', 'quantity'];
   stockData: {name: string, quantity: number}[] = [];
-  isOffcanvasOpen = false;
+  isOffcanvasOpen: boolean = false;
   ngOnInit(){
     this.stockData = [
       { name: 'Corn', quantity: 100 },
