@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+coverage/
+tmp/
 
 # Node
 /node_modules
@@ -19,6 +21,14 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+# Ignore IDE/editor files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln*
+*.swp
+.DS_Store
 
 # Visual Studio Code
 .vscode/*
@@ -40,3 +50,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Ignore environment files (optional)
+src/environments/environment.prod.ts
+src/environments/environment.ts
