@@ -11,7 +11,7 @@ import { throwIfEmpty } from 'rxjs';
   styleUrl: './farmstock.component.css'
 })
 export class FarmstockComponent {
-  data:any;
+  data:any[] = [];
    constructor(private http: HttpClient) {}
    
    ngOnInit(): void {
