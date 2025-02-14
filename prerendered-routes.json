@@ -1,0 +1,7 @@
+{
+  "routes": {
+    "/KSA": {},
+    "/KSA/dashboard": {},
+    "/KSA/farmstock": {}
+  }
+}
