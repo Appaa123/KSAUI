@@ -1,5 +1,24 @@
-<p>farmstock works!</p>
+<app-navbar></app-navbar>
 
-<h1>{{this.data[0]?.type}}</h1>
-<h2>{{this.data[0]?.summary}}</h2>
-<h2>{{this.data[0]?.quantity}}</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Type</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Date</th>
+        <th scope="col">Summery</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let data of this.data">
+        <td>{{data.id}}</td>
+        <td>{{data.type}}</td>
+        <td>{{data.quantity}}</td>
+        <td>{{data.date}}</td>
+        <td>{{data.summary}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="./dashboard" class="btn btn-primary">Back</a>

@@ -3,13 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { FarmstockRoutingModule } from './farmstock-routing.module';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [NavbarComponent],
   imports: [
     CommonModule,
-    FarmstockRoutingModule
+    FarmstockRoutingModule,
+    MatTableModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
+    
   ],
   providers: [
     provideHttpClient(withFetch()),

@@ -1,17 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { error } from 'console';
 import { response } from 'express';
 import { throwIfEmpty } from 'rxjs';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-farmstock',
-  imports: [],
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './farmstock.component.html',
   styleUrl: './farmstock.component.css'
 })
 export class FarmstockComponent {
   data:any[] = [];
+  isOffcanvasOpen: boolean = false;
    constructor(private http: HttpClient) {}
    
    ngOnInit(): void {
@@ -30,4 +33,12 @@ export class FarmstockComponent {
     });
 
    }
+
+   toggleOffcanvas() {
+    this.isOffcanvasOpen = !this.isOffcanvasOpen;
+  }
+
+  closeOffcanvas() {
+    this.isOffcanvasOpen = false;
+  }
 }

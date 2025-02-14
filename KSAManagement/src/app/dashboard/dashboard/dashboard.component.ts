@@ -1,9 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewEncapsulation } from '@angular/core';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
+  imports : [NavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   encapsulation: ViewEncapsulation.None
 })
@@ -12,12 +14,6 @@ export class DashboardComponent {
   stockData: {name: string, quantity: number}[] = [];
   isOffcanvasOpen: boolean = false;
   ngOnInit(){
-    this.stockData = [
-      { name: 'Corn', quantity: 100 },
-      { name: 'Wheat', quantity: 50 },
-      { name: 'Cattle Feed', quantity: 20 }
-      // more stock items
-    ];
   }
 
   toggleOffcanvas() {

@@ -6,11 +6,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, NavbarComponent],
   imports: [
     CommonModule,
       MatTableModule,
