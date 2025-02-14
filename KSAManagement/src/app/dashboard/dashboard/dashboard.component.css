@@ -1,8 +1,15 @@
 button.mat-button {
     background-color: red !important;
   }
+  .card{
+    height: 100%;
+    width: 100%;
+    display: block;
+    position:relative;
+  }
   .card-img-top {
     max-width: 100%;
-    height: auto;
+    height: 250px;
+    width: 250px;
     display: block;
 }
