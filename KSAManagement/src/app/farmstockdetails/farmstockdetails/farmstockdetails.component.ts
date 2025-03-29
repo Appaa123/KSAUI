@@ -30,7 +30,8 @@ export class FarmstockdetailsComponent {
   submitData() : Observable<any> {
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
     
-    return this.http.post(apiURL, this.formData).pipe(
+    return this.http.post(apiURL, this.formData, 
+      {headers: { 'Content-Type': 'application/json' }}).pipe(
       tap(response => console.log("Success!", response)),
       catchError(error => {
         console.error('Error:', error);
