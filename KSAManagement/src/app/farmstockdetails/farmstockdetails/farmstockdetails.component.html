@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<form class="row g-3" (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+      <label for="type" class="form-label">Farmstock Type</label>
+      <input type="string" class="form-control" id="type" [(ngModel)]="formData.type" name="type">
+    </div>
+    <div class="col-md-6">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" class="form-control" id="quantity" [(ngModel)]="formData.quantity" name="quantity">
+    </div>
+    <div class="container mt-3">
+        <label for="datepicker">Select Date:</label>
+        <div class="input-group date">
+            <input type="text" class="form-control" id="datepicker" [(ngModel)]="formData.date" name="date">
+            <span class="input-group-text">
+                <i class="bi bi-calendar"></i>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6">
+      <label for="days" class="form-label">Days</label>
+      <input type="number" class="form-control" id="days" [(ngModel)]="formData.days" name="days">
+    </div>
+
+    <div class="col-md-6">
+      <label for="summary" class="form-label">Summary</label>
+      <input type="text" class="form-control" id="summary" [(ngModel)]="formData.summary" name="summary">
+    </div>
+    <!-- <div class="col-md-4">
+      <label for="inputState" class="form-label">State</label>
+      <select id="inputState" class="form-select">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div> -->
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  </form>
