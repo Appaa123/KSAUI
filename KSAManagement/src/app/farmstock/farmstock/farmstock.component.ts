@@ -20,6 +20,10 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
    constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
    
    getFarmStockData(){
+    if (this.farmStockSubscription) {
+      this.farmStockSubscription.unsubscribe();
+      console.log('Unsubscribed from farm stock API');
+    }
     console.log('📡 Fetching fresh data...');
     this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
       next: (response) => {
@@ -32,7 +36,6 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
         console.error('Error fetching farmstock data', error);
       },
     });
-    this.farmStockSubscription.unsubscribe();
    }
 
    ngOnInit(): void {
