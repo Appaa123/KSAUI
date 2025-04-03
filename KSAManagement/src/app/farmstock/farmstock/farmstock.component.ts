@@ -25,13 +25,14 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
       next: (response) => {
         console.log('✅ API Response:', response);
         this.data = response;
-        this.cdRef.detectChanges();  // 🔹 Force UI update
+        //this.cdRef.detectChanges();  // 🔹 Force UI update
         console.log(this.data);
       },
       error: (error) => {
         console.error('Error fetching farmstock data', error);
       },
     });
+    this.farmStockSubscription.unsubscribe();
    }
 
    ngOnInit(): void {
@@ -41,8 +42,8 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
 
   ngDoCheck(): void {
       const currentData = JSON.stringify(this.data);
+      console.log("DoCheck....");
       if(this.previousData !== currentData){
-        console.log("Current Data = "+currentData);
         this.previousData = currentData;
         this.getFarmStockData();
       }
