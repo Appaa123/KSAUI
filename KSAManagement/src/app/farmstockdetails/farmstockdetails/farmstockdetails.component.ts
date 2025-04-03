@@ -16,6 +16,7 @@ import { catchError, Observable, tap } from 'rxjs';
 export class FarmstockdetailsComponent {
 
   isOffcanvasOpen: boolean = false;
+  data:any[] = [];
 
   formData = {
     type: '',
@@ -42,8 +43,23 @@ export class FarmstockdetailsComponent {
 
   onSubmit() {
     this.submitData().subscribe({
-      next : () => alert("Form Submitted successfully"),
+      next : () => {
+        this.getFarmStockData();
+        alert("Form Submitted successfully");
+      },
       error : () => alert("Failed to submit form")
+    });
+  }
+
+  getFarmStockData(){
+    this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
+      next: (response) => {
+        this.data = response;
+        console.log(this.data);
+      },
+      error: (error) => {
+        console.error('Error fetching farmstock data', error);
+      },
     });
   }
 
