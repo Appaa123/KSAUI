@@ -12,7 +12,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
   templateUrl: './farmstock.component.html',
   styleUrl: './farmstock.component.css'
 })
-export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
+export class FarmstockComponent implements OnInit, OnDestroy {
   data:any[] = [];
   isOffcanvasOpen: boolean = false;
   farmStockSubscription!: Subscription;
@@ -25,7 +25,11 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
       console.log('Unsubscribed from farm stock API');
     }
     console.log('📡 Fetching fresh data...');
-    this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
+    this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock",
+      {
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+        params: { '_t': new Date().getTime().toString() } // Prevents browser caching
+      }).subscribe({
       next: (response) => {
         console.log('✅ API Response:', response);
         this.data = response;
@@ -33,7 +37,7 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
         console.log(this.data);
       },
       error: (error) => {
-        console.error('Error fetching farmstock data', error);
+        console.error('❌ Error fetching farmstock data', error);
       },
     });
    }
@@ -43,14 +47,14 @@ export class FarmstockComponent implements OnInit, DoCheck, OnDestroy {
       this.getFarmStockData();
   }
 
-  ngDoCheck(): void {
-      const currentData = JSON.stringify(this.data);
-      console.log("DoCheck....");
-      if(this.previousData !== currentData){
-        this.previousData = currentData;
-        this.getFarmStockData();
-      }
-  }  
+  // ngDoCheck(): void {
+  //     const currentData = JSON.stringify(this.data);
+  //     console.log("DoCheck....");
+  //     if(this.previousData !== currentData){
+  //       this.previousData = currentData;
+  //       this.getFarmStockData();
+  //     }
+  // }  
 
    refreshData() {
     this.getFarmStockData();
