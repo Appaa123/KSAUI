@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { error } from 'console';
 import { response } from 'express';
 import { Subscription, throwIfEmpty } from 'rxjs';
@@ -16,16 +16,19 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   data:any[] = [];
   isOffcanvasOpen: boolean = false;
   farmStockSubscription!: Subscription;
-   constructor(private http: HttpClient) {}
+   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
    
    ngOnInit(): void {
-    this.getFarmStockData();
+    setTimeout(() => {  // 🔹 Add small delay to force change detection
+      this.getFarmStockData();
+    }, 100);
   }
 
    getFarmStockData(){
     this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
       next: (response) => {
         this.data = response;
+        this.cdRef.detectChanges();  // 🔹 Force UI update
         console.log(this.data);
       },
       error: (error) => {
