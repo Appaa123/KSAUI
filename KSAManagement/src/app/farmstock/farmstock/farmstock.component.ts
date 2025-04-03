@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { error } from 'console';
 import { response } from 'express';
-import { throwIfEmpty } from 'rxjs';
+import { Subscription, throwIfEmpty } from 'rxjs';
 import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
@@ -12,9 +12,10 @@ import { NavbarComponent } from '../../navbar/navbar.component';
   templateUrl: './farmstock.component.html',
   styleUrl: './farmstock.component.css'
 })
-export class FarmstockComponent implements OnInit {
+export class FarmstockComponent implements OnInit, OnDestroy {
   data:any[] = [];
   isOffcanvasOpen: boolean = false;
+  farmStockSubscription!: Subscription;
    constructor(private http: HttpClient) {}
    
    ngOnInit(): void {
@@ -22,7 +23,7 @@ export class FarmstockComponent implements OnInit {
   }
 
    getFarmStockData(){
-    this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
+    this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
       next: (response) => {
         this.data = response;
         console.log(this.data);
@@ -40,6 +41,13 @@ export class FarmstockComponent implements OnInit {
 
   closeOffcanvas() {
     this.isOffcanvasOpen = false;
+  }
+
+  ngOnDestroy(): void {
+    if (this.farmStockSubscription) {
+      this.farmStockSubscription.unsubscribe();
+      console.log('Unsubscribed from farm stock API');
+    }
   }
 
 }
