@@ -62,8 +62,19 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     console.log('Deleting Record:', this.selectedRecord);
     
     // Simulate API delete request
-    this.data = this.data.filter(item => item.id !== this.selectedRecord.id);
-    
+    //this.data = this.data.filter(item => item.id !== this.selectedRecord.id);
+    const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
+        
+        this.http.delete(apiURL, 
+          {headers: { 'Content-Type': 'application/json' },
+            params: {'Id': this.selectedRecord.Id}}).pipe(
+          tap(response => console.log("Success!", response)),
+          catchError(error => {
+            console.error('Error:', error);
+            throw error;
+          })
+        );
+  
     // Close the modal
     this.deleteModal.hide();
     
@@ -73,8 +84,9 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     console.log('Updated Record:', this.selectedRecord);
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
         
-        this.http.post(apiURL, this.selectedRecord, 
-          {headers: { 'Content-Type': 'application/json' }}).pipe(
+        this.http.put(apiURL, 
+          {headers: { 'Content-Type': 'application/json' },
+            params: {'Id': this.selectedRecord.Id}}).pipe(
           tap(response => console.log("Success!", response)),
           catchError(error => {
             console.error('Error:', error);
