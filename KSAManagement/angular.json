@@ -31,7 +31,8 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": [
                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
@@ -102,7 +103,9 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "bootstrap-icons/font/bootstrap-icons.css"
+
             ],
             "scripts": [
                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
