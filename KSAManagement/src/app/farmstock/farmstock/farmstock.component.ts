@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { error } from 'console';
 import { response } from 'express';
 import { throwIfEmpty } from 'rxjs';
@@ -12,7 +12,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
   templateUrl: './farmstock.component.html',
   styleUrl: './farmstock.component.css'
 })
-export class FarmstockComponent {
+export class FarmstockComponent implements OnInit {
   data:any[] = [];
   isOffcanvasOpen: boolean = false;
    constructor(private http: HttpClient) {}
@@ -41,4 +41,5 @@ export class FarmstockComponent {
   closeOffcanvas() {
     this.isOffcanvasOpen = false;
   }
+
 }
