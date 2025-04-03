@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { error } from 'console';
 import { response } from 'express';
-import { catchError, Subscription, tap, throwIfEmpty } from 'rxjs';
+import { catchError, Subscription, tap, throwError, throwIfEmpty } from 'rxjs';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 declare var bootstrap: any;
@@ -19,6 +19,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   isOffcanvasOpen: boolean = false;
   farmStockSubscription!: Subscription;
   selectedRecord: any = {}; // Store selected record
+  editModal: any;
   deleteModal: any; // Reference to modal instance
   //private previousData = '';
    constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
@@ -48,8 +49,8 @@ export class FarmstockComponent implements OnInit, OnDestroy {
 
    openEditModal(record: any) {
     this.selectedRecord = { ...record }; // Clone the record to avoid modifying the original data
-    const modal = new bootstrap.Modal(document.getElementById('editModal'));
-    modal.show();
+    this.editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    this.editModal.show();
   }
 
   openDeleteModal(record: any) {
@@ -65,34 +66,49 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     //this.data = this.data.filter(item => item.id !== this.selectedRecord.id);
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
         
-        this.http.delete(apiURL, 
+        this.http.delete(apiURL,
           {headers: { 'Content-Type': 'application/json' },
-            params: {'Id': this.selectedRecord.Id}}).pipe(
-          tap(response => console.log("Success!", response)),
-          catchError(error => {
-            console.error('Error:', error);
-            throw error;
+            params: {'Id': this.selectedRecord.id},
           })
-        );
+          .pipe(
+            tap(response => console.log("✅ Success!", response)),
+            catchError(error => {
+              console.error('❌ Error:', error);
+              return throwError(() => error); // ✅ Corrected throw error
+            })
+          )
+          .subscribe();
+            
   
     // Close the modal
     this.deleteModal.hide();
+
+    this.getFarmStockData();
     
   }
   
   saveChanges() {
     console.log('Updated Record:', this.selectedRecord);
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
+
+    var body = JSON.stringify(this.selectedRecord);
         
-        this.http.put(apiURL, 
-          {headers: { 'Content-Type': 'application/json' },
-            params: {'Id': this.selectedRecord.Id}}).pipe(
-          tap(response => console.log("Success!", response)),
-          catchError(error => {
-            console.error('Error:', error);
-            throw error;
-          })
-        );
+    this.http.put(apiURL, body, {
+      headers: { 'Content-Type': 'application/json' },
+      params: { 'Id': this.selectedRecord.id }  // ✅ Ensure API accepts params like this
+    })
+    .pipe(
+      tap(response => console.log("✅ Success!", response)),
+      catchError(error => {
+        console.error('❌ Error:', error);
+        return throwError(() => error); // ✅ Corrected throw error
+      })
+    )
+    .subscribe();
+
+    //close the model
+    this.editModal.hide();
+    this.getFarmStockData();
     }
 
    ngOnInit(): void {
