@@ -35,6 +35,10 @@ export class FarmstockComponent implements OnInit, OnDestroy {
 
    }
 
+   refreshData() {
+    this.getFarmStockData();
+  }
+
    toggleOffcanvas() {
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
   }
