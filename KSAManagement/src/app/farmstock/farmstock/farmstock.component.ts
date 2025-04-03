@@ -19,14 +19,15 @@ export class FarmstockComponent implements OnInit, OnDestroy {
    constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
    
    ngOnInit(): void {
-    setTimeout(() => {  // 🔹 Add small delay to force change detection
+    console.log('🚀 ngOnInit() triggered!'); 
       this.getFarmStockData();
-    }, 100);
   }
 
    getFarmStockData(){
+    console.log('📡 Fetching fresh data...');
     this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
       next: (response) => {
+        console.log('✅ API Response:', response);
         this.data = response;
         this.cdRef.detectChanges();  // 🔹 Force UI update
         console.log(this.data);
