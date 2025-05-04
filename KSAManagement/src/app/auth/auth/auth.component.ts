@@ -20,7 +20,6 @@ export class AuthComponent {
   formData = {
     Username:'',
     Password:''
-
   };
 
   constructor(private http:HttpClient, private router:Router){
