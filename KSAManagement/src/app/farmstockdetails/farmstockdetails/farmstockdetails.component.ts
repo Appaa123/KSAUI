@@ -6,10 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { response } from 'express';
 import { error } from 'console';
 import { catchError, Observable, tap } from 'rxjs';
+import { Route, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-farmstockdetails',
-  imports: [CommonModule, NavbarComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, FormsModule, RouterModule],
   templateUrl: './farmstockdetails.component.html',
   styleUrl: './farmstockdetails.component.css'
 })
@@ -26,7 +27,7 @@ export class FarmstockdetailsComponent {
     summary: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   submitData() : Observable<any> {
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
@@ -45,7 +46,8 @@ export class FarmstockdetailsComponent {
     this.submitData().subscribe({
       next : () => {
         this.getFarmStockData();
-        alert("Form Submitted successfully");
+        alert("Details Submitted successfully");
+        this.router.navigate(['/farmstock']);
       },
       error : () => alert("Failed to submit form")
     });

@@ -1,0 +1,22 @@
+<h1>KS Login page</h1>
+
+<form class="row g-3" (ngSubmit)="onSubmit()">
+<div class="row g-3 align-items-center">
+    <div class="row-auto">
+        <label for="Username" class="col-form-label">Username</label>
+      </div>
+      <div class="row-auto">
+        <input type="text" id="Username" name="Username" class="form-control"  [(ngModel)]="formData.Username" aria-describedby="input">
+      </div>
+    <div class="row-auto">
+      <label for="Password" class="col-form-label">Password</label>
+    </div>
+    <div class="row-auto">
+      <input type="password" id="Password" name="Password" class="form-control"  [(ngModel)]="formData.Password" aria-describedby="passwordHelpInline">
+    </div>
+
+    <div class="row-auto">
+        <button type="submit" class="btn btn-primary">submit</button>
+    </div>
+  </div>
+</form>

@@ -9,5 +9,10 @@ import { MatTableModule } from '@angular/material/table';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()), provideAnimationsAsync(), provideAnimationsAsync(), provideHttpClient(withFetch())]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes), 
+    provideClientHydration(withEventReplay()), 
+    provideAnimationsAsync(),
+     provideAnimationsAsync(), 
+     provideHttpClient(withFetch())]
 };

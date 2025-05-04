@@ -6,6 +6,7 @@ import { response } from 'express';
 import { catchError, Subscription, tap, throwError, throwIfEmpty } from 'rxjs';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 declare var bootstrap: any;
 
 @Component({
@@ -22,7 +23,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   editModal: any;
   deleteModal: any; // Reference to modal instance
   //private previousData = '';
-   constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
+   constructor(private http: HttpClient, private router:Router, private cdRef: ChangeDetectorRef) {}
    
    getFarmStockData(){
     if (this.farmStockSubscription) {
@@ -104,7 +105,15 @@ export class FarmstockComponent implements OnInit, OnDestroy {
         return throwError(() => error); // ✅ Corrected throw error
       })
     )
-    .subscribe();
+    .subscribe({
+      next: () => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/farmstock']);
+        });
+      }
+    }
+      
+    );
 
     //close the model
     this.editModal.hide();
