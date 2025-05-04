@@ -27,9 +27,9 @@ export class AuthComponent {
   }
 
    submitData() : Observable<any> {
-      const apiURL = "http://localhost:5001/api/Auth/login";
+      const apiURL = "https://ksaapi.onrender.com/api/Auth/login";
 
-      return this.http.post<Object>("http://localhost:5001/api/Auth/login",
+      return this.http.post<Object>("https://ksaapi.onrender.com/api/Auth/login",
         this.formData,
         {
           headers: { 'Content-Type': 'application/json' }
