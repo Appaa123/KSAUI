@@ -48,7 +48,8 @@ export class AuthComponent {
       this.submitData().subscribe({
         next: () => {
           alert("Form Submitted successfully");
-          localStorage.setItem('Username', this.formData.Username);
+          localStorage.setItem('user', this.formData.Username);
+          sessionStorage.setItem('token',this.token);
           try{
            this.router.navigate(['/dashboard']);
           }
