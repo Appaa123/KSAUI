@@ -18,6 +18,7 @@ export class FarmstockdetailsComponent {
 
   isOffcanvasOpen: boolean = false;
   data:any[] = [];
+  token = sessionStorage.getItem('jwt');
 
   formData = {
     type: '',
@@ -51,10 +52,17 @@ export class FarmstockdetailsComponent {
       },
       error : () => alert("Failed to submit form")
     });
-  }
-
+  };
   getFarmStockData(){
-    this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock").subscribe({
+    this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock",
+      {
+        headers: {
+        'Authorization': `Bearer ${this.token}`,         // 👈 Add this line
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+    }
+    ).subscribe({
       next: (response) => {
         this.data = response;
         console.log(this.data);
