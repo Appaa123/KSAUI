@@ -32,17 +32,16 @@ export class FarmstockComponent implements OnInit, OnDestroy {
       this.farmStockSubscription.unsubscribe();
       console.log('Unsubscribed from farm stock API');
     }
-    console.log('📡 Fetching fresh data...');
-<<<<<<< HEAD
-
-      console.log('Fetching JWT token')
+    //console.log('📡 Fetching fresh data...');
+    
+    
+    
+    console.log('📡 Fetching JWT token')
       this.token = sessionStorage.getItem('jwt'); 
-=======
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      // Use sessionStorage
-       this.token = sessionStorage.getItem('jwt'); 
-    }
->>>>>>> 6b1ae591afa9c31c89794ffed897acb155a4421a
+    // if (typeof window !== 'undefined' && window.sessionStorage) {
+    //   // Use sessionStorage
+    //    this.token = sessionStorage.getItem('jwt'); 
+    // }
 
     this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock",
       {
