@@ -21,7 +21,9 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   farmStockSubscription!: Subscription;
   selectedRecord: any = {}; // Store selected record
   editModal: any;
-  deleteModal: any; // Reference to modal instance
+  deleteModal: any; 
+  token: any = "";
+  // Reference to modal instance
   //private previousData = '';
    constructor(private http: HttpClient, private router:Router, private cdRef: ChangeDetectorRef) {}
    
@@ -31,9 +33,18 @@ export class FarmstockComponent implements OnInit, OnDestroy {
       console.log('Unsubscribed from farm stock API');
     }
     console.log('📡 Fetching fresh data...');
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      // Use sessionStorage
+       this.token = sessionStorage.getItem('jwt'); 
+    }
+
     this.farmStockSubscription = this.http.get<any>("https://ksaapi.onrender.com/api/FarmStock",
       {
-        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+        headers: {
+          'Authorization': `Bearer ${this.token}`,         // 👈 Add this line
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        },
         params: { '_t': new Date().getTime().toString() } // Prevents browser caching
       }).subscribe({
       next: (response) => {
@@ -66,9 +77,15 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     // Simulate API delete request
     //this.data = this.data.filter(item => item.id !== this.selectedRecord.id);
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
-        
+    var token = "";
+    if (typeof window !== 'undefined' && sessionStorage.getItem('jwt')) {
+      token = sessionStorage.getItem('jwt')!;
+    }
         this.http.delete(apiURL,
-          {headers: { 'Content-Type': 'application/json' },
+          {headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+           },
             params: {'Id': this.selectedRecord.id},
           })
           .pipe(
