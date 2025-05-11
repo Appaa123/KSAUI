@@ -34,28 +34,6 @@ export class AuthComponent {
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         }
       );
-      // .subscribe({
-      //   next: (response) => {
-      //     this.token = response.token; // ✅ Assign token here
-      //     console.log("Token received:", this.token);
-      //     alert("Form Submitted successfully");
-      //     try{
-      //      this.router.navigate(['/dashboard']);
-      //     }
-      //     catch (error) {
-      //       console.error('Navigation failed:', error);
-      //     }
-      
-      //     // Optional: store in sessionStorage for future authenticated requests
-      //     sessionStorage.setItem('jwt', this.token);
-      //     sessionStorage.setItem('user', this.formData.Username);
-      //   },
-      //   error: (error) => {
-      //     console.error('Login error:', error);
-      //   }
-      // });
-
-      //return this.token;
     }
   
     onSubmit() {
