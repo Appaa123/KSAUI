@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { error } from 'console';
 import { response } from 'express';
 import { catchError, Subscription, tap, throwError, throwIfEmpty } from 'rxjs';
@@ -25,8 +25,17 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   token: any = "";
   // Reference to modal instance
   //private previousData = '';
-   constructor(private http: HttpClient, private router:Router, private cdRef: ChangeDetectorRef) {}
+   constructor(private http: HttpClient, private router:Router, private cdRef: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {}
    
+   ngOnInit(): void {
+    console.log('🚀 ngOnInit() triggered!');
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = sessionStorage.getItem('jwt');
+    } 
+      this.getFarmStockData();
+
+  }
+
    getFarmStockData(){
     if (this.farmStockSubscription) {
       this.farmStockSubscription.unsubscribe();
@@ -37,7 +46,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     
     
     console.log('📡 Fetching JWT token')
-      this.token = sessionStorage.getItem('jwt'); 
+       
     // if (typeof window !== 'undefined' && window.sessionStorage) {
     //   // Use sessionStorage
     //    this.token = sessionStorage.getItem('jwt'); 
@@ -140,11 +149,6 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     this.editModal.hide();
     this.getFarmStockData();
     }
-
-   ngOnInit(): void {
-    console.log('🚀 ngOnInit() triggered!'); 
-      this.getFarmStockData();
-  }
 
   // ngDoCheck(): void {
   //     const currentData = JSON.stringify(this.data);
