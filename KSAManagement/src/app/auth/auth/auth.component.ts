@@ -60,5 +60,5 @@ export class AuthComponent {
           console.error('Login error:', error);
         }
       });
-    }
+    } 
 }
