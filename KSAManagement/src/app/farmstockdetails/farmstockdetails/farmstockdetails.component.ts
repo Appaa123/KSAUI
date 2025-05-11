@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { response } from 'express';
@@ -18,7 +18,8 @@ export class FarmstockdetailsComponent {
 
   isOffcanvasOpen: boolean = false;
   data:any[] = [];
-  token = sessionStorage.getItem('jwt');
+  token: any = "";
+  
 
   formData = {
     type: '',
@@ -28,8 +29,13 @@ export class FarmstockdetailsComponent {
     summary: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
 
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = sessionStorage.getItem('jwt');
+    }
+  }
   submitData() : Observable<any> {
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
     
