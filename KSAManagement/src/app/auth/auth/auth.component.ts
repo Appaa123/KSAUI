@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { User } from '../../Models/User';
 import { catchError, Observable, tap } from 'rxjs';
@@ -31,7 +31,7 @@ export class AuthComponent {
       return this.http.post<{token: string}>("https://ksaapi.onrender.com/api/Auth/login",
         this.formData,
         {
-          headers: { 'Content-Type': 'application/json' }
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         }
       );
       // .subscribe({
