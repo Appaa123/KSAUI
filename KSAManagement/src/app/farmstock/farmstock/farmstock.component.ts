@@ -49,8 +49,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
           'Authorization': `Bearer ${this.token}`,         // 👈 Add this line
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
-        },
-        params: { '_t': new Date().getTime().toString() } // Prevents browser caching
+        }
       }).subscribe({
       next: (response) => {
         console.log('✅ API Response:', response);
