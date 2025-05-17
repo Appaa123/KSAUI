@@ -43,7 +43,10 @@ export class AuthComponent {
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         }
       );
-      this.spinner.hide();
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 2000);
       return this.tokenData;
     }
   

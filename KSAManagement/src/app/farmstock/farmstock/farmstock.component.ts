@@ -48,6 +48,11 @@ export class FarmstockComponent implements OnInit, OnDestroy {
 
     this.spinner.show();
 
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 5000);
+
     if (this.farmStockSubscription) {
       this.farmStockSubscription.unsubscribe();
       console.log('Unsubscribed from farm stock API');
@@ -81,7 +86,10 @@ export class FarmstockComponent implements OnInit, OnDestroy {
         console.error('❌ Error fetching farmstock data', error);
       },
     });
-    this.spinner.hide();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
    }
 
    openEditModal(record: any) {

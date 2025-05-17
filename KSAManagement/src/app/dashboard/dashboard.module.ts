@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 
 
@@ -18,7 +19,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
       MatButtonModule,
       MatDialogModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      NgxSpinnerComponent
 
   ],
   exports: [DashboardComponent]

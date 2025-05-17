@@ -34,6 +34,13 @@ export class DashboardComponent {
     }
   }
 
+  loadSpinner(){
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
+  }
   toggleOffcanvas() {
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
   }
