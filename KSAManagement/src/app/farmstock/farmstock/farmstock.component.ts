@@ -32,6 +32,9 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.token = sessionStorage.getItem('jwt');
     } 
+    if(this.token == undefined || this.token == null || this.token == ""){
+      this.router.navigate(['/auth']);
+    }
       this.getFarmStockData();
 
   }
@@ -125,7 +128,10 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     var body = JSON.stringify(this.selectedRecord);
         
     this.http.put(apiURL, body, {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+       },
       params: { 'Id': this.selectedRecord.id }  // ✅ Ensure API accepts params like this
     })
     .pipe(

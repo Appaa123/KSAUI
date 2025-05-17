@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,12 @@ export class NavbarComponent {
 
   isOffcanvasOpen: boolean = false;
 
+  constructor(private router:Router){}
+
+  logout(){
+    this.router.navigate(['/auth']);
+    sessionStorage.clear();
+  }
   toggleOffcanvas() {
     this.isOffcanvasOpen = !this.isOffcanvasOpen;
   }

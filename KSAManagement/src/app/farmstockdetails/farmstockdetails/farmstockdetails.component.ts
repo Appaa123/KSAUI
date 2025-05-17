@@ -35,6 +35,9 @@ export class FarmstockdetailsComponent {
     if (isPlatformBrowser(this.platformId)) {
       this.token = sessionStorage.getItem('jwt');
     }
+    if(this.token == undefined || this.token == null || this.token == ""){
+      this.router.navigate(['/auth']);
+    }
   }
   submitData() : Observable<any> {
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
