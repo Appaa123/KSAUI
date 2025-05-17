@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     RouterModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AuthModule { }
