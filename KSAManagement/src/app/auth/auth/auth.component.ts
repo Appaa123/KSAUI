@@ -17,6 +17,7 @@ export class AuthComponent {
 
   private token:any;
   private user:any;
+  private tokenData:Observable<any> = new Observable<any>();
 
   formData = {
     Username:'',
@@ -34,23 +35,24 @@ export class AuthComponent {
 
    submitData() : Observable<any> {
       const apiURL = "https://ksaapi.onrender.com/api/Auth/login";
-
-      return this.http.post<{token: string}>("https://ksaapi.onrender.com/api/Auth/login",
+      
+      this.spinner.show();
+      this.tokenData = this.http.post<{token: string}>("https://ksaapi.onrender.com/api/Auth/login",
         this.formData,
         {
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         }
       );
+      this.spinner.hide();
+      return this.tokenData;
     }
   
     onSubmit() {
       this.submitData()
       .subscribe({
         next: (response) => {
-          this.spinner.show();
           this.token = response.token; // ✅ Assign token here
           console.log("Token received:", this.token);
-          this.spinner.hide();
           alert("Form Submitted successfully");
           try{
            this.router.navigate(['/dashboard']);
