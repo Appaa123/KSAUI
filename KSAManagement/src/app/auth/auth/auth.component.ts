@@ -5,6 +5,7 @@ import { catchError, Observable, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { provideRouter, Router, RouterModule } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-auth',
@@ -22,7 +23,13 @@ export class AuthComponent {
     Password:''
   };
 
-  constructor(private http:HttpClient, private router:Router, @Inject(PLATFORM_ID) private platformId: Object){
+  constructor(
+    private http:HttpClient,
+    private spinner: NgxSpinnerService, 
+    private router:Router, 
+    @Inject(PLATFORM_ID) private platformId: Object
+  )
+  {
   }
 
    submitData() : Observable<any> {
@@ -40,8 +47,10 @@ export class AuthComponent {
       this.submitData()
       .subscribe({
         next: (response) => {
+          this.spinner.show();
           this.token = response.token; // ✅ Assign token here
           console.log("Token received:", this.token);
+          this.spinner.hide();
           alert("Form Submitted successfully");
           try{
            this.router.navigate(['/dashboard']);

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClient } from '@angular/common/http';
 
 
@@ -13,7 +14,8 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class AuthModule { }

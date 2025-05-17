@@ -32,7 +32,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
               "src/styles.css",
-              "bootstrap-icons/font/bootstrap-icons.css"
+              "bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": [
                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
@@ -104,7 +105,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
               "src/styles.css",
-              "bootstrap-icons/font/bootstrap-icons.css"
+              "bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
 
             ],
             "scripts": [
