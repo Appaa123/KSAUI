@@ -7,11 +7,12 @@ import { catchError, Subscription, tap, throwError, throwIfEmpty } from 'rxjs';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-farmstock',
-  imports: [CommonModule, NavbarComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, FormsModule, NgxSpinnerComponent],
   templateUrl: './farmstock.component.html',
   styleUrl: './farmstock.component.css'
 })
@@ -25,7 +26,11 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   token: any = "";
   // Reference to modal instance
   //private previousData = '';
-   constructor(private http: HttpClient, private router:Router, private cdRef: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {}
+   constructor(private http: HttpClient, 
+    private router:Router, 
+    private cdRef: ChangeDetectorRef, 
+    @Inject(PLATFORM_ID) private platformId: Object,
+   private spinner: NgxSpinnerService) {}
    
    ngOnInit(): void {
     console.log('🚀 ngOnInit() triggered!');
@@ -40,6 +45,9 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   }
 
    getFarmStockData(){
+
+    this.spinner.show();
+
     if (this.farmStockSubscription) {
       this.farmStockSubscription.unsubscribe();
       console.log('Unsubscribed from farm stock API');
@@ -73,6 +81,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
         console.error('❌ Error fetching farmstock data', error);
       },
     });
+    this.spinner.hide();
    }
 
    openEditModal(record: any) {

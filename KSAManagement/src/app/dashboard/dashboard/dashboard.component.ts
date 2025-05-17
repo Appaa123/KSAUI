@@ -3,12 +3,13 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  imports : [NavbarComponent],
+  imports : [NavbarComponent, NgxSpinnerComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   encapsulation: ViewEncapsulation.None
 })
@@ -18,7 +19,11 @@ export class DashboardComponent {
   isOffcanvasOpen: boolean = false;
   token: any = "";
 
-  constructor(private http: HttpClient, private router:Router, private cdRef: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private http: HttpClient, 
+    private router:Router, 
+    private cdRef: ChangeDetectorRef, 
+    @Inject(PLATFORM_ID) private platformId: Object,
+   private spinner: NgxSpinnerService) {}
 
   ngOnInit(){
     if (isPlatformBrowser(this.platformId)) {
