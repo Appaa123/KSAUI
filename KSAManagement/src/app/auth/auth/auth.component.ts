@@ -5,11 +5,11 @@ import { catchError, Observable, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { provideRouter, Router, RouterModule } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-auth',
-  imports: [RouterModule, CommonModule, FormsModule],
+  imports: [RouterModule, CommonModule, FormsModule, NgxSpinnerModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
