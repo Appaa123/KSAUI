@@ -1,13 +1,15 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, DoCheck, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { error } from 'console';
+import { Console, error } from 'console';
 import { response } from 'express';
 import { catchError, Subscription, tap, throwError, throwIfEmpty } from 'rxjs';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
+import { FarmstockdetailsModule } from '../../farmstockdetails/farmstockdetails.module';
+import { AuthService } from '../../services/auth/auth.service';
 declare var bootstrap: any;
 
 @Component({
@@ -24,24 +26,33 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   editModal: any;
   deleteModal: any; 
   token: any = "";
+  isTokenVerified:boolean = false;
   // Reference to modal instance
   //private previousData = '';
    constructor(private http: HttpClient, 
-    private router:Router, 
-    private cdRef: ChangeDetectorRef, 
+    private router:Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-   private spinner: NgxSpinnerService) {}
+   private spinner: NgxSpinnerService,
+  private authService: AuthService) {}
    
    ngOnInit(): void {
     console.log('🚀 ngOnInit() triggered!');
     if (isPlatformBrowser(this.platformId)) {
       this.token = sessionStorage.getItem('jwt');
-    } 
-    if(this.token == undefined || this.token == null || this.token == ""){
-      this.router.navigate(['/auth']);
     }
-      this.getFarmStockData();
-
+    this.authService.verifyToken(this.token).forEach(response => {
+      if (!response.valid) {
+        console.log("Token validation failed!!");
+        this.router.navigate(['/auth']);
+      } else {
+        console.log("Token validation successful!!");
+      }
+    }).catch(error => {
+      alert('Token verification failed');
+      this.router.navigate(['/auth']);
+      console.error(error);
+    });
+    this.getFarmStockData();
   }
 
    getFarmStockData(){

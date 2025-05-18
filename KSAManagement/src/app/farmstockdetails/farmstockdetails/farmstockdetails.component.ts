@@ -7,6 +7,7 @@ import { response } from 'express';
 import { error } from 'console';
 import { catchError, Observable, tap } from 'rxjs';
 import { Route, Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-farmstockdetails',
@@ -19,6 +20,7 @@ export class FarmstockdetailsComponent {
   isOffcanvasOpen: boolean = false;
   data:any[] = [];
   token: any = "";
+  isTokenVerified:boolean = false;
   
 
   formData = {
@@ -29,21 +31,36 @@ export class FarmstockdetailsComponent {
     summary: ''
   };
 
-  constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService) {}
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.token = sessionStorage.getItem('jwt');
-    }
-    if(this.token == undefined || this.token == null || this.token == ""){
-      this.router.navigate(['/auth']);
+      if (isPlatformBrowser(this.platformId)) {
+        this.token = sessionStorage.getItem('jwt');
+        this.authService.verifyToken(this.token).forEach(response => {
+          if (!response.valid) {
+            console.log("Token validation failed!!");
+            this.router.navigate(['/auth']);
+          } else {
+            console.log("Token validation successful!!");
+          }
+        }).catch(error => {
+          alert('Token verification failed');
+          this.router.navigate(['/auth']);
+          console.error(error);
+        });
+      } 
     }
   }
   submitData() : Observable<any> {
     const apiURL = "https://ksaapi.onrender.com/api/FarmStock";
     
     return this.http.post(apiURL, this.formData, 
-      {headers: { 'Content-Type': 'application/json' }}).pipe(
+      {
+        headers: { 
+          'Authorization': `Bearer ${this.token}`,
+          'Content-Type': 'application/json' 
+        }}).pipe(
       tap(response => console.log("Success!", response)),
       catchError(error => {
         console.error('Error:', error);

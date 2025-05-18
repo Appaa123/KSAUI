@@ -11,8 +11,7 @@ import { HttpClient } from '@angular/common/http';
   imports: [
     CommonModule,
     FarmstockdetailsRoutingModule,
-    NavbarComponent,
-    HttpClient
+    NavbarComponent
   ]
 })
 export class FarmstockdetailsModule { }
