@@ -44,8 +44,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            },
-            "baseHref": "/KSAManagement/"
+            }
           },
           "configurations": {
             "production": {
@@ -61,7 +60,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/KSAManagement/"
             },
             "development": {
               "optimization": false,
