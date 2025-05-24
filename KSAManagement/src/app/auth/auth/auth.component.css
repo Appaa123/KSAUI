@@ -1,0 +1,58 @@
+:host {
+    display: block;
+    height: 100vh;
+    width: auto;
+    background-image: url('/assets/KS_BG.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+  }
+  
+  .formblock {
+    position: relative;
+    display: block;
+    width: 32%;
+    height: auto;
+    padding: 2%;
+    margin-left: 35%;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow: 0 0 10px black;
+    z-index: 1;
+    overflow: hidden; /* Ensures ::before is clipped inside */
+  }
+  
+  .formblock::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: aliceblue;
+    opacity: 0.7; /* Corrected */
+    border-radius: 10px;
+    z-index: -1;
+  }
+  
+  h1 {
+    padding-left: 5%;
+    padding-top: 5%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .formblock {
+      width: 90%;
+      margin: 10% auto; /* Centers it horizontally */
+      padding: 4%;
+    }
+  
+    h1 {
+      margin-left: 0;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+  }
+  
