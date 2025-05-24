@@ -6,8 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { provideRouter, Router, RouterModule } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgForm } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'app-auth',
   imports: [RouterModule, CommonModule, FormsModule, NgxSpinnerModule],
   templateUrl: './auth.component.html',
@@ -50,7 +52,8 @@ export class AuthComponent {
       return this.tokenData;
     }
   
-    onSubmit() {
+    onSubmit(form: NgForm) {
+      if(form.valid){
       this.submitData()
       .subscribe({
         next: (response) => {
@@ -74,5 +77,6 @@ export class AuthComponent {
           console.error('Login error:', error);
         }
       });
-    } 
+    }
+  } 
 }

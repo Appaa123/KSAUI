@@ -1,23 +1,48 @@
 <h1>KS Login page</h1>
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 <div class="formblock">
-<form class="row g-3" (ngSubmit)="onSubmit()">
+<form #form = "ngForm" class="row g-3" (ngSubmit)="onSubmit(form)">
 <div class="row g-3 align-items-center">
     <div class="row-auto">
         <label for="Username" class="col-form-label">Username</label>
       </div>
       <div class="row-auto">
-        <input type="text" id="Username" name="Username" class="form-control"  [(ngModel)]="formData.Username" aria-describedby="input">
+        <input type="text" id="Username" 
+        name="Username" 
+        class="form-control"  
+        [(ngModel)]="formData.Username" 
+        required
+        minlength="3"
+        aria-describedby="input" 
+        #username="ngModel">
+        <div *ngIf="username.invalid && username.touched" class="text-danger">
+          <div *ngIf="username.errors?.['required']">Username is required.</div>
+          <div *ngIf="username.errors?.['minlength']">Minimum 3 characters required.</div>
+        </div>
       </div>
     <div class="row-auto">
       <label for="Password" class="col-form-label">Password</label>
     </div>
     <div class="row-auto">
-      <input type="password" id="Password" name="Password" class="form-control"  [(ngModel)]="formData.Password" aria-describedby="passwordHelpInline">
+      <input type="password" 
+      id="Password" 
+      name="Password" 
+      class="form-control"  
+      [(ngModel)]="formData.Password"
+      required
+      minlength="6"
+      aria-describedby="passwordHelpInline"
+      #password="ngModel">
+      <div *ngIf="password.invalid && password.touched" class="text-danger">
+        <div *ngIf="password.errors?.['required']">Password is required.</div>
+        <div *ngIf="password.errors?.['minlength']">Minimum 6 characters required.</div>
+      </div>
     </div>
 
     <div class="row-auto">
-        <button type="submit" class="btn btn-primary">submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          submit
+        </button>
     </div>
   </div>
 </form>
