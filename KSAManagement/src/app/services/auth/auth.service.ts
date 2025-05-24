@@ -7,7 +7,7 @@ import { catchError, Observable, tap } from 'rxjs';
 })
 export class AuthService {
   private tokenData:any;
-  private apiURL:any = "https://localhost:5002/api/Auth/verify-token";
+  private apiURL:any = "https://ksaapi.onrender.com/api/Auth/verify-token";
   constructor(private http: HttpClient) { }
 
   verifyToken(token: string): Observable<any>{

@@ -10,8 +10,13 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
 
   isOffcanvasOpen: boolean = false;
+  user: string | null = "";
 
   constructor(private router:Router){}
+
+  ngOnInit(){
+    this.user = sessionStorage.getItem('user');
+  }
 
   logout(){
     this.router.navigate(['/auth']);
