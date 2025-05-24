@@ -3,14 +3,15 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../services/auth/auth.service';
+import { SpinnerService } from '../../services/auth/spinner.service';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  imports : [NavbarComponent, NgxSpinnerComponent],
+  imports : [NavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   encapsulation: ViewEncapsulation.None
 })
@@ -24,6 +25,7 @@ export class DashboardComponent {
     private router:Router, 
     private cdRef: ChangeDetectorRef, 
     @Inject(PLATFORM_ID) private platformId: Object,
+   private spinnerService: SpinnerService,
    private spinner: NgxSpinnerService,
   private authService: AuthService) {}
 
@@ -46,11 +48,7 @@ export class DashboardComponent {
   }
 
   loadSpinner(){
-    this.spinner.show();
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 2000);
+    this.spinner = this.spinnerService.loadSpinner();
   }
   toggleOffcanvas() {
     this.isOffcanvasOpen = !this.isOffcanvasOpen;

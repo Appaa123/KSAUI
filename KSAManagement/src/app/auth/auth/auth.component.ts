@@ -7,6 +7,7 @@ import { provideRouter, Router, RouterModule } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { NgForm } from '@angular/forms';
+import { SpinnerService } from '../../services/auth/spinner.service';
 
 @Component({
   standalone: true,
@@ -28,6 +29,7 @@ export class AuthComponent {
 
   constructor(
     private http:HttpClient,
+    private spinnerService: SpinnerService,
     private spinner: NgxSpinnerService, 
     private router:Router, 
     @Inject(PLATFORM_ID) private platformId: Object
@@ -78,5 +80,9 @@ export class AuthComponent {
         }
       });
     }
-  } 
+  }
+  
+  loadSpinner(){
+    this.spinner = this.spinnerService.loadSpinner();
+  }
 }

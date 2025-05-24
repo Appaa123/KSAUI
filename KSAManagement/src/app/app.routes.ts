@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { FarmstockComponent } from './farmstock/farmstock/farmstock.component';
 import { FarmstockdetailsComponent } from './farmstockdetails/farmstockdetails/farmstockdetails.component';
 import { AuthComponent } from './auth/auth/auth.component';
+import { RegisterComponent } from './register/register/register.component';
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -11,7 +12,8 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'farmstock', component: FarmstockComponent},
     { path: 'farmstockdetails', component: FarmstockdetailsComponent},
-    { path: 'auth', component: AuthComponent}
+    { path: 'auth', component: AuthComponent},
+    { path: 'register', component: RegisterComponent}
     //{ path: 'inventory', component: InventoryComponent },
     // other routes
   ];

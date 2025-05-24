@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { FarmstockdetailsModule } from '../../farmstockdetails/farmstockdetails.module';
 import { AuthService } from '../../services/auth/auth.service';
+import { SpinnerService } from '../../services/auth/spinner.service';
 declare var bootstrap: any;
 
 @Component({
@@ -33,6 +34,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
     private router:Router,
     @Inject(PLATFORM_ID) private platformId: Object,
    private spinner: NgxSpinnerService,
+   private spinnerSerice: SpinnerService,
   private authService: AuthService) {}
    
    ngOnInit(): void {

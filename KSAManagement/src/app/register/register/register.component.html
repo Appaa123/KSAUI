@@ -1,4 +1,4 @@
-<h1>KS Login page</h1>
+<h1>Register New User</h1>
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 <div class="formblock">
 <form #form = "ngForm" class="row g-3" (ngSubmit)="onSubmit(form)">
@@ -38,10 +38,33 @@
         <div *ngIf="password.errors?.['minlength']">Minimum 6 characters required.</div>
       </div>
     </div>
+    <div class="row-auto">
+        <label for="Password" class="col-form-label">Re-enter Password</label>
+      </div>
+      <div class="row-auto">
+        <input type="text" 
+        id="Re_enter_password" 
+        name="Re_enter_password" 
+        class="form-control"  
+        [(ngModel)]="formData.Re_enter_password"
+        required
+        minlength="6"
+        aria-describedby="passwordHelpInline"
+        #Re_enter_password="ngModel">
+        <div *ngIf="Re_enter_password.invalid && Re_enter_password.touched" class="text-danger">
+          <div *ngIf="Re_enter_password.errors?.['required']">Password is required.</div>
+          <div *ngIf="Re_enter_password.errors?.['minlength']">Minimum 6 characters required.</div>
+        </div>
+      </div>
   <a href="./register" onclick="loadSpinner()">Register New User</a>
     <div class="row-auto">
         <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
           submit
+        </button>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-primary" routerLink="/auth">
+          back
         </button>
     </div>
   </div>
