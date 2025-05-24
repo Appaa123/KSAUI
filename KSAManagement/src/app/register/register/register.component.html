@@ -50,13 +50,13 @@
         required
         minlength="6"
         aria-describedby="passwordHelpInline"
-        #Re_enter_password="ngModel">
-        <div *ngIf="Re_enter_password.invalid && Re_enter_password.touched" class="text-danger">
-          <div *ngIf="Re_enter_password.errors?.['required']">Password is required.</div>
-          <div *ngIf="Re_enter_password.errors?.['minlength']">Minimum 6 characters required.</div>
+        #re_enter_password="ngModel">
+        <div *ngIf="re_enter_password.invalid && re_enter_password.touched" class="text-danger">
+          <div *ngIf="re_enter_password.errors?.['required']">Password is required.</div>
+          <div *ngIf="re_enter_password.errors?.['minlength']">Minimum 6 characters required.</div>
+          <div *ngIf="noMatch == true">Minimum 6 characters required.</div>
         </div>
       </div>
-  <a href="./register" onclick="loadSpinner()">Register New User</a>
     <div class="row-auto">
         <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
           submit
