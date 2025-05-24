@@ -2,7 +2,7 @@
     display: block;
     height: 100vh;
     width: auto;
-    background-image: url('/assets/KS_BG.jpeg');
+    background-image: url('/assets/KS_BGImage.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -36,9 +36,13 @@
     border-radius: 10px;
     z-index: -1;
   }
+  .formblock:hover{
+    background-color: darkgray;
+  }
   
   h1 {
-    padding-left: 5%;
+    text-align: center;
+    /* padding-left: 43%; */
     padding-top: 5%;
   }
 
@@ -53,6 +57,7 @@
       margin-left: 0;
       text-align: center;
       font-size: 1.5rem;
+
     }
   }
   
