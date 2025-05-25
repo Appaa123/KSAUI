@@ -1,0 +1,8 @@
+.card{
+    border-radius: 40px;
+    box-shadow: 80%;
+}
+.card:hover{
+    border-radius: 50px;
+    box-shadow: 100%;
+}
