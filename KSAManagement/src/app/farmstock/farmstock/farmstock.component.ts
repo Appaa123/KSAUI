@@ -11,11 +11,14 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { FarmstockdetailsModule } from '../../farmstockdetails/farmstockdetails.module';
 import { AuthService } from '../../services/auth/auth.service';
 import { SpinnerService } from '../../services/auth/spinner.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-farmstock',
-  imports: [CommonModule, NavbarComponent, FormsModule, NgxSpinnerComponent],
+  imports: [CommonModule, NavbarComponent, FormsModule, NgxSpinnerComponent,
+    NgxPaginationModule
+  ],
   templateUrl: './farmstock.component.html',
   styleUrl: './farmstock.component.css'
 })
@@ -28,6 +31,7 @@ export class FarmstockComponent implements OnInit, OnDestroy {
   deleteModal: any; 
   token: any = "";
   isTokenVerified:boolean = false;
+  p: number = 1;
   // Reference to modal instance
   //private previousData = '';
    constructor(private http: HttpClient, 
@@ -92,6 +96,19 @@ export class FarmstockComponent implements OnInit, OnDestroy {
       next: (response) => {
         console.log('✅ API Response:', response);
         this.data = response;
+
+
+
+
+
+
+
+
+
+
+
+
+        
         //this.cdRef.detectChanges();  // 🔹 Force UI update
         console.log(this.data);
       },

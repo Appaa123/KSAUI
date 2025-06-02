@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let data of this.data">
+      <tr *ngFor = "let data of this.data | paginate: { itemsPerPage: 10, currentPage: p }">
         <td>{{data.id}}</td>
         <td>{{data.type}}</td>
         <td>{{data.quantity}}</td>
@@ -88,5 +88,7 @@
       </div>
     </div>
   </div>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
   <a href="./dashboard" class="btn btn-primary">Back</a>
